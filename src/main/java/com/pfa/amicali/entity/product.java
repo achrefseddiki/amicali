@@ -1,47 +1,25 @@
-package com.pfa.amicali.entity;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+package com.pfa.amicali.Entity;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "product")
-public class product  implements Serializable{
+public class Product implements Serializable{
 	
 	
 	
 	
-	public product() {
-	
-	}
-
-	
-	
-
-	public product(String product_name, float product_price, String discription_price, String pictureUrl,
-			Date createdAt, Date updatedAt) {
-		super();
-		this.product_name = product_name;
-		this.product_price = product_price;
-		this.discription_price = discription_price;
-		this.pictureUrl = pictureUrl;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
+	@ManyToOne
+    @JoinColumn(name = "providers", nullable = false)
+    private Provider providers;
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
+	  List<FeedBack> feedback;
 
 	
 
@@ -64,29 +42,30 @@ public class product  implements Serializable{
 
 
 
-	@ManyToOne
-    @JoinColumn(name = "providers", nullable = false)
-    private provider providers;
+	public Product() {
+
+	}
    
 	
 	
-	public provider getProviders() {
+	public Product(String product_name, float product_price, String discription_price, String pictureUrl,
+				   Date createdAt, Date updatedAt) {
+		super();
+		this.product_name = product_name;
+		this.product_price = product_price;
+		this.discription_price = discription_price;
+		this.pictureUrl = pictureUrl;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
+	public Provider getProviders() {
 		return providers;
 	}
-
-
-
-
-	public void setProviders(provider providers) {
+	
+	public void setProviders(Provider providers) {
 		this.providers = providers;
 	}
-	
-	
-	
-	
-	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
-	  List<feedBack> feedback;
 	  
 	  @Column(name="rating", columnDefinition = "int default 0") 
 	  private int rating;
@@ -214,19 +193,7 @@ public class product  implements Serializable{
     @LastModifiedDate
     private Date updatedAt;
     
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-	
-	public List<feedBack> getFeedback() {
+	public List<FeedBack> getFeedback() {
 		return feedback;
 	}
 
@@ -234,7 +201,7 @@ public class product  implements Serializable{
 
 
 
-	public void setFeedback(List<feedBack> feedback) {
+	public void setFeedback(List<FeedBack> feedback) {
 		this.feedback = feedback;
 	}
 

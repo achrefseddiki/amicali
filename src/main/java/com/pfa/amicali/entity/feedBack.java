@@ -1,22 +1,13 @@
-package com.pfa.amicali.entity;
+package com.pfa.amicali.Entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "feedBack")
 
-public class feedBack implements Serializable{
+public class FeedBack implements Serializable{
 
 
     @Id
@@ -38,31 +29,16 @@ public class feedBack implements Serializable{
  
     @ManyToOne
     @JoinColumn(name = "product", nullable = false)
-    private product product;
+    private Product product;
     
     @ManyToOne
     @JoinColumn(name = "provider", nullable = false)
-    private provider providers;
- 
- 
-    public provider getProviders() {
-		return providers;
-	}
-
-	public void setProviders(provider providers) {
-		this.providers = providers;
-	}
-
+    private Provider providers;
 	@Column(name = "created", nullable = true)
-    private Date created;    
- 
-    @PrePersist
-      protected void onCreate() {
-        created = new Date();
-      }
+    private Date created;
 
-	public feedBack(Long id, String provider_name, String provider_Email, String comment, int rating,
-			product product, Date created) {
+	public FeedBack(Long id, String provider_name, String provider_Email, String comment, int rating,
+					Product product, Date created) {
 		super();
 		this.id = id;
 		this.provider_name = provider_name;
@@ -73,8 +49,21 @@ public class feedBack implements Serializable{
 		this.created = created;
 	}
 
-	public feedBack() {
-		
+	public FeedBack() {
+
+	}
+ 
+    @PrePersist
+      protected void onCreate() {
+        created = new Date();
+      }
+
+    public Provider getProviders() {
+		return providers;
+	}
+
+	public void setProviders(Provider providers) {
+		this.providers = providers;
 	}
 
 	public Long getId() {
@@ -117,11 +106,11 @@ public class feedBack implements Serializable{
 		this.rating = rating;
 	}
 
-	public product getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(product product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
