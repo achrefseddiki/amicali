@@ -1,4 +1,4 @@
-package com.pfa.amicali.entity;
+package com.pfa.amicali.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,10 +18,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 
 @Entity
-@Table(name = "provider")
-public class provider implements Serializable{
+@Table(name = "Provider")
+public class Provider implements Serializable{
 	
-	public provider(String taxCode, String provider_name, String phoneN, String email, String address, Date createdAt,
+	public Provider(String taxCode, String provider_name, String phoneN, String email, String address, Date createdAt,
 			Date updatedAt) {
 		super();
 		this.taxCode = taxCode;
@@ -34,7 +34,7 @@ public class provider implements Serializable{
 	}
 
 
-	public provider() {
+	public Provider() {
 		
 	}
 	
@@ -72,23 +72,23 @@ public class provider implements Serializable{
     
     
     
-    @OneToMany(mappedBy = "provider", fetch = FetchType.LAZY) private
-	  List<product> products;
+    @OneToMany(mappedBy = "Providers", fetch = FetchType.LAZY) private
+	  List<Product> Products;
 	  
 	  
-	  public List<product> getProducts() {
-		return products;
+	  public List<Product> getProducts() {
+		return Products;
 	}
 
 
-	public void setProducts(List<product> products) {
-		this.products = products;
+	public void setProducts(List<Product> Products) {
+		this.Products = Products;
 	}
 
 
 
-	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY) private
-	  List<feedBack> feedback;
+	@OneToMany(mappedBy = "Providers", fetch = FetchType.LAZY) private
+	  List<FeedBack> feedback;
 	  
 	  @Column(name="rating", columnDefinition = "int default 0") 
 	  private int rating;
@@ -179,12 +179,12 @@ public class provider implements Serializable{
 	
 	
 
-	public List<feedBack> getFeedback() {
+	public List<FeedBack> getFeedback() {
 		return feedback;
 	}
 
 
-	public void setFeedback(List<feedBack> feedback) {
+	public void setFeedback(List<FeedBack> feedback) {
 		this.feedback = feedback;
 	}
 
@@ -201,7 +201,7 @@ public class provider implements Serializable{
 
 	@Override
 	public String toString() {
-		return "provider [id=" + id + ", taxCode=" + taxCode + ", provider_name=" + provider_name + ", phoneN=" + phoneN
+		return "Provider [id=" + id + ", taxCode=" + taxCode + ", provider_name=" + provider_name + ", phoneN=" + phoneN
 				+ ", email=" + email + ", address=" + address + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
 				+ "]";
 	}

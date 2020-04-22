@@ -1,4 +1,4 @@
-package com.pfa.amicali.entity;
+package com.pfa.amicali.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,20 +19,20 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
-@Table(name = "product")
-public class product  implements Serializable{
+@Table(name = "Product")
+public class Product  implements Serializable{
 	
 	
 	
 	
-	public product() {
+	public Product() {
 	
 	}
 
 	
 	
 
-	public product(String product_name, float product_price, String discription_price, String pictureUrl,
+	public Product(String product_name, float product_price, String discription_price, String pictureUrl,
 			Date createdAt, Date updatedAt) {
 		super();
 		this.product_name = product_name;
@@ -65,28 +65,28 @@ public class product  implements Serializable{
 
 
 	@ManyToOne
-    @JoinColumn(name = "providers", nullable = false)
-    private provider providers;
+    @JoinColumn(name = "Providers", nullable = false)
+    private Provider Providers;
    
 	
 	
-	public provider getProviders() {
-		return providers;
+	public Provider getProviders() {
+		return Providers;
 	}
 
 
 
 
-	public void setProviders(provider providers) {
-		this.providers = providers;
+	public void setProviders(Provider Providers) {
+		this.Providers = Providers;
 	}
 	
 	
 	
 	
 	
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
-	  List<feedBack> feedback;
+	@OneToMany(mappedBy = "Product", fetch = FetchType.LAZY) private
+	  List<FeedBack> feedback;
 	  
 	  @Column(name="rating", columnDefinition = "int default 0") 
 	  private int rating;
@@ -226,7 +226,7 @@ public class product  implements Serializable{
     
     
 	
-	public List<feedBack> getFeedback() {
+	public List<FeedBack> getFeedback() {
 		return feedback;
 	}
 
@@ -234,7 +234,7 @@ public class product  implements Serializable{
 
 
 
-	public void setFeedback(List<feedBack> feedback) {
+	public void setFeedback(List<FeedBack> feedback) {
 		this.feedback = feedback;
 	}
 
@@ -259,7 +259,7 @@ public class product  implements Serializable{
 
 	@Override
 	public String toString() {
-		return "product [id=" + id + ", product_name=" + product_name + ", product_price=" + product_price
+		return "Product [id=" + id + ", product_name=" + product_name + ", product_price=" + product_price
 				+ ", discription_price=" + discription_price + ", pictureUrl=" + pictureUrl + ", createdAt=" + createdAt
 				+ ", updatedAt=" + updatedAt + "]";
 	}

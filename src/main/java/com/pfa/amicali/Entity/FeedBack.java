@@ -1,4 +1,4 @@
-package com.pfa.amicali.entity;
+package com.pfa.amicali.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,9 +14,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "feedBack")
+@Table(name = "FeedBack")
 
-public class feedBack implements Serializable{
+public class FeedBack implements Serializable{
 
 
     @Id
@@ -37,20 +37,20 @@ public class feedBack implements Serializable{
     private int rating;
  
     @ManyToOne
-    @JoinColumn(name = "product", nullable = false)
-    private product product;
+    @JoinColumn(name = "Product", nullable = false)
+    private Product Product;
     
     @ManyToOne
-    @JoinColumn(name = "provider", nullable = false)
-    private provider providers;
+    @JoinColumn(name = "Provider", nullable = false)
+    private Provider Providers;
  
  
-    public provider getProviders() {
-		return providers;
+    public Provider getProviders() {
+		return Providers;
 	}
 
-	public void setProviders(provider providers) {
-		this.providers = providers;
+	public void setProviders(Provider Providers) {
+		this.Providers = Providers;
 	}
 
 	@Column(name = "created", nullable = true)
@@ -61,19 +61,19 @@ public class feedBack implements Serializable{
         created = new Date();
       }
 
-	public feedBack(Long id, String provider_name, String provider_Email, String comment, int rating,
-			product product, Date created) {
+	public FeedBack(Long id, String provider_name, String provider_Email, String comment, int rating,
+			Product Product, Date created) {
 		super();
 		this.id = id;
 		this.provider_name = provider_name;
 		this.provider_Email = provider_Email;
 		this.comment = comment;
 		this.rating = rating;
-		this.product = product;
+		this.Product = Product;
 		this.created = created;
 	}
 
-	public feedBack() {
+	public FeedBack() {
 		
 	}
 
@@ -117,12 +117,12 @@ public class feedBack implements Serializable{
 		this.rating = rating;
 	}
 
-	public product getProduct() {
-		return product;
+	public Product getProduct() {
+		return Product;
 	}
 
-	public void setProduct(product product) {
-		this.product = product;
+	public void setProduct(Product Product) {
+		this.Product = Product;
 	}
 
 	public Date getCreated() {
@@ -135,8 +135,8 @@ public class feedBack implements Serializable{
 
 	@Override
 	public String toString() {
-		return "feedBack [id=" + id + ", provider_name=" + provider_name + ", provider_Email=" + provider_Email
-				+ ", comment=" + comment + ", rating=" + rating + ", product=" + product + ", created=" + created + "]";
+		return "FeedBack [id=" + id + ", provider_name=" + provider_name + ", provider_Email=" + provider_Email
+				+ ", comment=" + comment + ", rating=" + rating + ", Product=" + Product + ", created=" + created + "]";
 	}
  
 
