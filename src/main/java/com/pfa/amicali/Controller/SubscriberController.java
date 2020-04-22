@@ -10,13 +10,14 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping(path = "/subscriber")
 public class SubscriberController {
 
 
     @Autowired
     private SubscriberServiceImpl subscriberService;
 
-    @GetMapping(value = "/subscribers")
+    @GetMapping(value = "/show")
     public List<Subscriber> getSubscribers() {
 
         List<Subscriber> subscribers = subscriberService.read();
@@ -25,7 +26,7 @@ public class SubscriberController {
     }
 
 
-    @GetMapping(value = "/subscribers/{id}")
+    @GetMapping(value = "/show/{id}")
     public Optional<Subscriber> getSubscribers(@PathVariable Long id) {
 
         Optional<Subscriber> subscribers = subscriberService.read(id);
@@ -33,7 +34,7 @@ public class SubscriberController {
         return subscribers;
     }
 
-    @PostMapping(path= "/add/sub")
+    @PostMapping(path= "/add")
     public void creatSubscriber(@RequestBody Subscriber subscriber){
         subscriberService.create(subscriber);
 

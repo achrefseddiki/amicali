@@ -11,43 +11,30 @@ import java.util.List;
 @Entity
 @Table(name = "product")
 public class Product implements Serializable{
-	
-	
-	
-	
-	@ManyToOne
-    @JoinColumn(name = "providers", nullable = false)
-    private Provider providers;
-	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
-	  List<FeedBack> feedback;
-
-	
-
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	@Column(name = "product_name", nullable = false)
     private String product_name;
-	
 	@Column(name = "product_price", nullable = false)
     private float product_price;
-	
 	@Column(name = "discription_price", nullable = false)
     private String discription_price;
-	
-	
-
-
-
-
-
+	private String pictureUrl;
+	@Column(name = "created_at", nullable = false)
+	@CreatedDate
+	private Date createdAt;
+	@Column(name = "updated_at", nullable = false)
+	@LastModifiedDate
+	private Date updatedAt;
+	@ManyToOne
+	@JoinColumn(name = "providers", nullable = false)
+	private Provider providers;
+	@OneToMany(mappedBy = "product", fetch = FetchType.LAZY) private
+	List<FeedBack> feedback;
 	public Product() {
-
 	}
-   
-	
-	
 	public Product(String product_name, float product_price, String discription_price, String pictureUrl,
 				   Date createdAt, Date updatedAt) {
 		super();
@@ -124,7 +111,9 @@ public class Product implements Serializable{
 	}
 
 
-
+	public List<FeedBack> getFeedback() {
+		return feedback;
+	}
 
 	
 	public void setDiscription_price(String discription_price) {
@@ -177,25 +166,6 @@ public class Product implements Serializable{
 		this.updatedAt = updatedAt;
 	}
 
-
-
-
-	private String pictureUrl;
-
-	
-	
-	@Column(name = "created_at", nullable = false)
-    @CreatedDate
-    private Date createdAt;
-    
-    
-    @Column(name = "updated_at", nullable = false)
-    @LastModifiedDate
-    private Date updatedAt;
-    
-	public List<FeedBack> getFeedback() {
-		return feedback;
-	}
 
 
 
