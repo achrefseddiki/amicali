@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/subs")
+@CrossOrigin(origins = "*")
 public class SubscriberController {
 
 
@@ -33,10 +33,17 @@ public class SubscriberController {
         return subscribers;
     }
 
-    @PostMapping(path= "/add/sub", consumes = "application/json", produces = "application/json")
+    @PostMapping(path= "/add/sub")
     public void creatSubscriber(@RequestBody Subscriber subscriber){
         subscriberService.create(subscriber);
 
     }
+
+    @DeleteMapping("/delete/{id}")
+    public List<Subscriber> cancelRegistration(@PathVariable long id) {
+        subscriberService.delete(id);
+        return subscriberService.read();
+    }
+
 
 }
