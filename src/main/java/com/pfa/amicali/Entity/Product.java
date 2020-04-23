@@ -25,8 +25,37 @@ public class Product  implements Serializable{
 	
 	
 	
-	public Product() {
 	
+	
+
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+	@Column(name = "product_name", nullable = false)
+    private String product_name;
+	
+	@Column(name = "product_price", nullable = false)
+    private float product_price;
+	
+	@Column(name = "discription_price", nullable = false)
+    private String discription_price;
+	private String pictureUrl;
+
+	
+	
+	@Column(name = "created_at", nullable = false)
+    @CreatedDate
+    private Date createdAt;
+    
+    
+    @Column(name = "updated_at", nullable = false)
+    @LastModifiedDate
+    private Date updatedAt;
+	
+	
+	public Product() {
+		
 	}
 
 	
@@ -42,23 +71,6 @@ public class Product  implements Serializable{
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 	}
-
-	
-
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-	@Column(name = "product_name", nullable = false)
-    private String product_name;
-	
-	@Column(name = "product_price", nullable = false)
-    private float product_price;
-	
-	@Column(name = "discription_price", nullable = false)
-    private String discription_price;
-	
-	
 
 
 
@@ -201,18 +213,7 @@ public class Product  implements Serializable{
 
 
 
-	private String pictureUrl;
-
 	
-	
-	@Column(name = "created_at", nullable = false)
-    @CreatedDate
-    private Date createdAt;
-    
-    
-    @Column(name = "updated_at", nullable = false)
-    @LastModifiedDate
-    private Date updatedAt;
     
     
     
