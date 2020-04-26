@@ -1,22 +1,12 @@
 package com.pfa.amicali.Entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "Product")
@@ -40,20 +30,34 @@ public class Product  implements Serializable{
 	
 	@Column(name = "discription_price", nullable = false)
     private String discription_price;
+
 	private String pictureUrl;
 
 	
 	
-	@Column(name = "created_at", nullable = false)
+	@Column(name = "created_at", nullable = true)
     @CreatedDate
     private Date createdAt;
     
     
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at", nullable = true)
     @LastModifiedDate
     private Date updatedAt;
-	
-	
+
+	@ManyToOne
+	@JoinColumn(name = "Providers", nullable = false)
+	private Provider Providers;
+
+	@OneToMany(mappedBy = "Product", fetch = FetchType.LAZY)
+	private List<FeedBack> feedback;
+
+	@Column(name="rating", columnDefinition = "int default 0")
+	private int rating;
+
+
+
+
+
 	public Product() {
 		
 	}
@@ -76,10 +80,7 @@ public class Product  implements Serializable{
 
 
 
-	@ManyToOne
-    @JoinColumn(name = "Providers", nullable = false)
-    private Provider Providers;
-   
+
 	
 	
 	public Provider getProviders() {
@@ -96,13 +97,7 @@ public class Product  implements Serializable{
 	
 	
 	
-	
-	@OneToMany(mappedBy = "Product", fetch = FetchType.LAZY) private
-	  List<FeedBack> feedback;
-	  
-	  @Column(name="rating", columnDefinition = "int default 0") 
-	  private int rating;
-	 
+
 	
 	
 	

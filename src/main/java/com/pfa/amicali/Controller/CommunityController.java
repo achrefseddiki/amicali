@@ -18,7 +18,7 @@ public class CommunityController {
     private CommunityService communityService;
 
     @GetMapping(value = "/show")
-    public List<Community> getSubscribers() {
+    public List<Community> getCommunity() {
 
         List<Community> communities = communityService.read();
 
@@ -27,24 +27,39 @@ public class CommunityController {
 
 
     @GetMapping(value = "/show/{id}")
-    public Optional<Community> getSubscribers(@PathVariable Long id) {
+    public Optional<Community> getCommunity(@PathVariable Long id) {
 
         Optional<Community> community = communityService.read(id);
 
         return community;
     }
 
-    @PostMapping(path= "/add")
-    public void creatSubscriber(@RequestBody Community community){
+    @PostMapping(path= "/add", consumes = "application/json", produces = "application/json")
+    public void creatCommunity(@RequestBody Community community){
         communityService.create(community);
 
     }
 
     @DeleteMapping("/delete/{id}")
-    public List<Community> cancelRegistration(@PathVariable long id) {
+    public List<Community> cancelCommunity(@PathVariable long id) {
         communityService.delete(id);
         return communityService.read();
     }
 
+    @PostMapping("/add/member/{idMember}/community/{idCommunity}")
+    public String addMember(@PathVariable("idCommunity") Long idCommunity, @PathVariable("idMember") Long idMember ){
+
+
+
+        return communityService.addMemberTOCommunity(idCommunity,idMember);
+    }
+
+    @DeleteMapping("/delete/member/{idMember}/community/{idCommunity}")
+    public Optional<Community> removeMember(@PathVariable("idCommunity") Long idCommunity,@PathVariable("idMember") Long idMember ){
+
+        communityService.removeMemberTOCommunity(idCommunity,idMember);
+
+        return communityService.read(idCommunity);
+    }
 
 }
