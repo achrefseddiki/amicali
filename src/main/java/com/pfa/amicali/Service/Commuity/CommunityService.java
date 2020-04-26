@@ -18,4 +18,7 @@ public interface CommunityService {
     Optional<Community> read(Long id);
 
     List<Community> read();
+
+    String addMemberTOCommunity(long idCommunity, long idMember);
+    void removeMemberTOCommunity(long idCommunity, long idMember);
 }

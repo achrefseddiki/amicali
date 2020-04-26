@@ -34,8 +34,8 @@ public class SubscriberController {
         return subscribers;
     }
 
-    @PostMapping(path= "/add")
-    public void creatSubscriber(@RequestBody Subscriber subscriber){
+    @PostMapping(path= "/add", consumes = "application/json", produces = "application/json")
+    public void creatSubscriber(@RequestBody Subscriber subscriber ){
         subscriberService.create(subscriber);
 
     }
